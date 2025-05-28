@@ -33,6 +33,7 @@ export default function SignupForm() {
       console.log("username: ", username)
       const { user, token } = await dispatch(signupUser({ username, email, password })).unwrap();
       if (user && token) {
+        console.log('User', user)
         toast.success('Account created successfully! Please sign in.')
         router.push('/login')
         // router.replace('/');

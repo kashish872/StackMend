@@ -10,7 +10,8 @@ export default function Navigation() {
             <Link href={'/signup'} className="mr-4 text-2xl text-blue-300"> Signup </Link>
             <Link href={'/login'} className="mr-4 text-2xl text-blue-300"> Login </Link>
             <Link href={'/forgetpassword'} className="mr-4 text-2xl text-blue-300"> Forget Password </Link>
-            <Link href={'/error/102'} className="mr-4 text-2xl text-blue-300"> Error </Link>
+            <Link href={"/help"} className="mr-4 text-2xl text-blue-300">Help</Link>
+            <Link href={"/questions"} className="mr-4 text-2xl text-blue-300">Questions</Link>
         </nav>
     );
 }

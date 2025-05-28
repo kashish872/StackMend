@@ -31,8 +31,9 @@ export default function Header() {
         {/* Navigation */}
         <div className="flex space-x-6 text-sm sm:text-base items-center justify-center">
           <Link href="/" className="hover:text-indigo-600 dark:text-white dark:hover:text-indigo-600">Home</Link>
-          <Link href="/error" className="hover:text-indigo-600 dark:text-white dark:hover:text-indigo-600">Questions</Link>
           <Link href="/dashboard" className="hover:text-indigo-600 dark:text-white dark:hover:text-indigo-600">Dashboard</Link>
+                    <Link href="/questions" className="hover:text-indigo-600 dark:text-white dark:hover:text-indigo-600">Questions</Link>
+
           <Link href="/help" className="hover:text-indigo-600 dark:text-white dark:hover:text-indigo-600">Help</Link>
           <Link href="/about" className="hover:text-indigo-600 dark:text-white dark:hover:text-indigo-600">About</Link>
 

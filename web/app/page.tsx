@@ -1,7 +1,10 @@
 import Image from 'next/image'
+import img from '@/components/assets/image.png'
+import Sidebar from '@/components/Sidebar'
 
 export default function Home() {
   return (
+    
     <div className="flex">
       <div className="flex-1 p-6">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -22,7 +25,7 @@ export default function Home() {
 
           <div className="flex justify-center">
             <Image 
-              src="/Trans1.jpg" 
+              src={img} 
               alt="Code Fix Preview" 
               width={800}
               height={600}
