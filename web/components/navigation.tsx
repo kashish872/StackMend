@@ -12,6 +12,6 @@ export default function Navigation() {
             <Link href={'/forgetpassword'} className="mr-4 text-2xl text-blue-300"> Forget Password </Link>
             <Link href={"/help"} className="mr-4 text-2xl text-blue-300">Help</Link>
             <Link href={"/questions"} className="mr-4 text-2xl text-blue-300">Questions</Link>
-        </nav>
+            </nav>
     );
 }
