@@ -1,47 +1,58 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { FieldValues, SubmitHandler, useForm, useFormState } from 'react-hook-form'
-import { signIn } from 'next-auth/react'
-import { toast } from 'react-hot-toast'
-import Button from '@/components/ui/Button'
-import Input from '@/components/ui/Input'
-import { RootState, useAppDispatch } from '@/store/store'
-import { loginUser } from '@/features/auth/authSlice'
-import { useSelector } from 'react-redux'
+import { useRouter } from 'next/navigation';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+// import { toast } from 'react-hot-toast';
+import { loginUser } from '@/features/auth/authSlice';
+import { useAppDispatch } from '@/store/store';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
+// import { Toaster } from "@/components/ui/sonner"
+import { toast } from "sonner"
 
 export default function LoginForm() {
-  const dispatch = useAppDispatch()
-  const router = useRouter()
-  const { error, loading } = useSelector((state: RootState) => state.auth);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
       email: '',
-      password: ''
-    }
-  })
+      password: '',
+    },
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const email = data.email;
-    const password = data.password;
-
-    console.log("email: ", email, "password: ", password);
     try {
-      const { user, token } = await dispatch(loginUser({ email, password })).unwrap();
-      // console.log(user, token);
+      const { user, token } = await dispatch(
+        loginUser({ email: data.email, password: data.password })
+      ).unwrap();
+
       if (user && token) {
-        toast.success('Logged in successfully!')
-        router.push('/dashboard')
+        // toast.success('Logged in successfully!');
+        router.push('/dashboard');
+        
       }
-    } catch (error) {
-      toast.error('Something went wrong!')
+    } catch (error: any) {
+      if (error?.status === 401) {
+        toast.error('Invalid email or password');
+      } else {
+        toast.error(error.message || 'Login failed. Please try again.');
+      }
     }
+  };
+
+  const handleToast = () =>{
+    toast("Logged in successfully", {
+          // description: "Sunday, December 03, 2023 at 9:00 AM",
+          action: {
+            label: "Ok",
+            onClick: () => console.log("Ok"),
+          },
+        })
   }
 
   return (
@@ -50,7 +61,6 @@ export default function LoginForm() {
         id="email"
         label="Email address"
         type="email"
-        disabled={loading}
         register={register}
         errors={errors}
         required
@@ -59,14 +69,22 @@ export default function LoginForm() {
         id="password"
         label="Password"
         type="password"
-        disabled={loading}
         register={register}
         errors={errors}
         required
       />
-      <Button disabled={loading} fullWidth type="submit">
+      <Button fullWidth type="submit">
         Sign in
       </Button>
+      <Button onClick={()=>toast("Event has been created", {
+          description: "Sunday, December 03, 2023 at 9:00 AM",
+          action: {
+            label: "Undo",
+            onClick: () => console.log("Undo"),
+          },
+        })}>
+        Show Toast
+      </Button>
     </form>
-  )
+  );
 }
